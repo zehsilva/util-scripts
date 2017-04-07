@@ -1,4 +1,20 @@
 #!/usr/bin/python
+"""
+@author = eliezer silva (djosacv@gmail.com)
+@copyleft
+
+instructions: 
+1) make sure you can run the script with something like chmod a+x .. 
+2) bibfinder.py "query publication name string" [author name] (optional)
+
+examples:
+bibfinder.py "latent dirichlet allocation"
+bibfinder.py "latent dirichlet allocation" "blei"
+
+limitations:
+- the normal query processing of bdlp returns 25 results, usually the most recent,
+we didn't try to tweak it in any way, so for now this is the main limitation
+"""
 
 import sys
 import feedparser
