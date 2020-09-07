@@ -16,6 +16,10 @@ else
     then
        # Start New Session with our name
        tmux new-session -d -s $SESSION
+       if [ "$2" = "conda" ]
+       then
+           tmux send-keys -t $SESSION 'conda activate '"$3" Enter
+       fi
        tmux send-keys -t $SESSION 'jupyter-notebook --no-browser --port='"$1" Enter
        echo "Loading jupyter-notebook remote server"
        sleep 5
