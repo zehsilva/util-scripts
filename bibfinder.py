@@ -18,11 +18,11 @@ we didn't try to tweak it in any way, so for now this is the main limitation
 
 import sys
 import feedparser
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import re
-from HTMLParser import HTMLParser
-from urlparse import urlparse
-import urllib2
+from html.parser import HTMLParser
+from urllib.parse import urlparse
+import urllib.request, urllib.error, urllib.parse
 
 class mydblpbibparser(HTMLParser):
     def __init__(self):
@@ -107,7 +107,7 @@ class mydblpparser(HTMLParser):
                 self.inentry=False
                 if(len(self.actual_link)>0):
                     if(self.found_auth or self.author==None):
-                        print "bib link="+self.actual_link
+                        print("bib link="+self.actual_link)
                         self.result.append("".join(process_item(self.actual_link,mydblpbibparser())))
                         
                 
@@ -121,14 +121,14 @@ class mydblpparser(HTMLParser):
         if(self.inauthorlist and self.author!=None):
             if self.author.lower() in data.lower():
                 self.found_auth=True
-                print "Found author: "+data
+                print("Found author: "+data)
 
 
 def openurlitem(item):
-    print "link ="+item
-    req = urllib2.Request(item)
+    print("link ="+item)
+    req = urllib.request.Request(item)
     req.add_header("User-Agent", "Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0")
-    fp=urllib2.urlopen(req)
+    fp=urllib.request.urlopen(req)
     data=fp.read()
     #print data
     return data
@@ -142,9 +142,9 @@ def process_item(url_link,parser):
 def main(argv):
     linkstr="http://dblp.uni-trier.de/search?q="
     if(len(argv)==2):
-        print "\n".join(process_item(linkstr+argv[1].replace(" ","+"),mydblpparser()))
+        print("\n".join(process_item(linkstr+argv[1].replace(" ","+"),mydblpparser())))
     if(len(argv)==3):
-        print "\n".join(process_item(linkstr+argv[1].replace(" ","+"),mydblpparser(argv[2])))
+        print("\n".join(process_item(linkstr+argv[1].replace(" ","+"),mydblpparser(argv[2]))))
 
 
 if __name__ == "__main__":
