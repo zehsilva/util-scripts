@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """
 @author = eliezer silva (djosacv@gmail.com)
 @copyleft
@@ -30,6 +30,7 @@ class mydblpbibparser(HTMLParser):
         self.bibtex_section=False
         self.indata=False
         self.result=[]
+        self.convert_charrefs = True
 
     def handle_starttag(self, tag, attrs):
         if(tag == 'div'):
@@ -66,6 +67,7 @@ class mydblpparser(HTMLParser):
         self.result=[]
         self.author=author_name
         self.found_auth=False
+        self.convert_charrefs = True
 
     def handle_starttag(self, tag, attrs):
         if(tag == 'div' and self.in_result_list):
@@ -131,7 +133,8 @@ def openurlitem(item):
     fp=urllib.request.urlopen(req)
     data=fp.read()
     #print data
-    return data
+    datastr = data.decode()
+    return datastr
 
 def process_item(url_link,parser):
     #parser = myhtmlparser()
