@@ -22,16 +22,13 @@ else
        fi
        tmux send-keys -t $SESSION 'jupyter-notebook --no-browser --port='"$1" Enter
        echo "Loading jupyter-notebook remote server"
-       sleep 5
-       list_runtime=$(ls ~/.local/share/jupyter/runtime/nbserver*.json)
-       for x in $list_runtime
-       do 
-          nb_port=$(cat $x | python3 -c "import sys, json; json_in=json.load(sys.stdin); print(str(json_in['url']).split(':')[2].split('/')[0])")
-          if [ "$1" == "$nb_port" ]
-          then
-              cat $x | python3 -c "import sys, json; json_in=json.load(sys.stdin); print(json_in['url']+'tree?token='+json_in['token'])" ; 
-          fi
-       done
-    fi
+       sleep 10
+    fi 
+    list_runtime=$(ls ~/.local/share/jupyter/runtime/nbserver*.json)
+    for x in $list_runtime
+    do
+       cat $x | python3 -c "import sys, json; json_in=json.load(sys.stdin); print('Notebook token='+json_in['token'])" ; 
+       cat $x | python3 -c "import sys, json; json_in=json.load(sys.stdin); print('Full url='+json_in['url']+'tree?token='+json_in['token'])" ; 
+    done
 fi
 
