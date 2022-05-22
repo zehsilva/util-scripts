@@ -8,4 +8,4 @@
 - There are three options of usage now:
   1) run remote default jupyter-notebook installation using ``remote-notebook-forward.sh port user@remote`` and copy the generated url to your local browser
   2) run remote jupyter-notebook in pre-existing conda environment (called ``env_name`` here) using ``remote-notebook-forward.sh port user@remote conda env_name`` and copy the generated url to your local browser
-  3) To stop the server first close the script doing ``ctrl+c`` to kill the port forwarding, then run to clean to remote server ``remote-notebook-forward.sh port user@remote k`` (noticed ``k`` in the end)
+  3) To stop the server first close the script doing ``ctrl+c`` to kill the port forwarding, then run to clean to remote server ``remote-notebook-forward.sh port user@remote kill`` (noticed ``kill`` in the end)
