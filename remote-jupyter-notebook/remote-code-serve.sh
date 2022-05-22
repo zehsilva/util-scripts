@@ -2,7 +2,7 @@
 if [ "$3" = "kill" ]
 then
         echo "killing remote code-server"
-        ssh $2 ./code_server.sh $1 kill $4 
+        ssh $2 ./code_server.sh $1 kill
 else
         if [ "$3" = "conda" ]
         then
